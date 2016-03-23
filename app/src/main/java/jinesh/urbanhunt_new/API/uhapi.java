@@ -10,7 +10,10 @@ import retrofit.http.Field;
 import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.Header;
+import retrofit.http.Multipart;
 import retrofit.http.POST;
+import retrofit.http.Part;
+import retrofit.mime.TypedFile;
 
 /**
  * Created by Jinesh on 04/03/16.
@@ -25,11 +28,11 @@ public interface uhapi {
 //    public void createNewUser(@Body User user,Callback<Dummy> Response);
 
     @FormUrlEncoded
-    @POST("/register/")
+    @POST("/auth/register/")
     public void createUserNew(@FieldMap Map<String,String> params, Callback<Dummy> Response);
 
     @FormUrlEncoded
-    @POST("/login/")
+    @POST("/auth/login/")
     public void loginUser(@FieldMap Map<String,String> params,Callback<JsonObject> Response);
 
 //    @FormUrlEncoded
@@ -49,9 +52,12 @@ public interface uhapi {
 
     @FormUrlEncoded
     @POST("/auth1/logout/")
-    public void faceboookLogoutUser(@Header("Authorization") String auth_token,@Field("client_id") String client_id,
+    public void faceboookLogoutUser(@Field("client_id") String client_id,
                                     Callback<Dummy> Response);
 
 
+    @Multipart
+    @POST("/user_profile/upload/")
+    public void uploadBill(@Header("Authorization") String auth_token,@Part("image") TypedFile image,Callback<Dummy> Response );
 
 }

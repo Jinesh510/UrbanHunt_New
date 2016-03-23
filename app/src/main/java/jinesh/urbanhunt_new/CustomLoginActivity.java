@@ -28,7 +28,7 @@ public class CustomLoginActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     Button loginBtn;
-    String API = "http://192.168.1.104:8000/auth/";
+    String API = "http://192.168.1.104:8000/";
     String strUsername;
     String strPassword;
 

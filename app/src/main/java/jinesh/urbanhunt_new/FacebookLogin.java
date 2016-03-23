@@ -99,7 +99,7 @@ public class FacebookLogin extends AppCompatActivity {
                             @Override
                             public void run() {
                             /* Create an Intent that will start the Menu-Activity. */
-                                Intent mainIntent = new Intent(FacebookLogin.this, LogoutActivity.class);
+                                Intent mainIntent = new Intent(FacebookLogin.this, StoreDetailActivity.class);
                                 FacebookLogin.this.startActivity(mainIntent);
                                 FacebookLogin.this.finish();
                             }

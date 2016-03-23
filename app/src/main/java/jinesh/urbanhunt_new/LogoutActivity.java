@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
+
 import jinesh.urbanhunt_new.API.uhapi;
 import retrofit.Callback;
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -33,7 +36,17 @@ public class LogoutActivity extends AppCompatActivity {
 
         facebookLogoutBtn = (Button)findViewById(R.id.logoutBtn);
 
+
         c = this;
+
+        final String a_t = SaveSharedPreference.getFBUserAccessToken(LogoutActivity.this);
+
+        Log.d("acc_tok", a_t);
+
+        String a_t_1 = a_t.replace("\"", "");
+
+        Log.d("acc_tok_without_quotes", a_t_1);
+
 
 
         facebookLogoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -51,18 +64,38 @@ public class LogoutActivity extends AppCompatActivity {
 
                     Log.d("Access_token_2", SaveSharedPreference.getFBUserAccessToken(LogoutActivity.this));
 
+                    final String token = "Token ";
+
+                    final String access_token = SaveSharedPreference.getFBUserAccessToken(LogoutActivity.this);
+
+                    String access_token_wo_quotes = access_token.replace("\"","");
+
+                    final String s = token.concat(access_token_wo_quotes);
+
+                    Log.d("merged str", s);
+
+
+
                     RestAdapter restAdapter = new RestAdapter.Builder().
-                            setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).build();
+                            setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).setRequestInterceptor(new RequestInterceptor() {
+                        @Override
+                        public void intercept(RequestFacade request) {
+                            request.addHeader("Authorization",s);
+
+//                            request.addHeader("Authorization","Token a871c374d0f008611dc1e25ee04f29d9c549ceae" );
+
+                        }
+                    }).build();
 
                     uhapi uh = restAdapter.create(uhapi.class);
 
-                    uh.faceboookLogoutUser("Token" + " "+ SaveSharedPreference.getFBUserAccessToken(LogoutActivity.this),
-                            CLIENT_ID, new Callback<Dummy>() {
+                    uh.faceboookLogoutUser(CLIENT_ID, new Callback<Dummy>() {
                         @Override
                         public void success(Dummy dummy, Response response) {
 
-                            Log.d("LoggedOut","true");
+                            Log.d("LoggedOut", "true");
                             SaveSharedPreference.removeFBUserAccessToken(LogoutActivity.this);
+                            LoginManager.getInstance().logOut();
 
                             Intent i = new Intent(c,LoginPreferenceManagerActivity.class);
                             startActivity(i);
