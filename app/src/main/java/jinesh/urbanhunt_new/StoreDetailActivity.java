@@ -40,11 +40,9 @@ public class StoreDetailActivity extends AppCompatActivity {
         setContentView(R.layout.store_detail);
 
         billImage = (ImageView)findViewById(R.id.billImage);
-
         pickImageBtn = (Button)findViewById(R.id.pickImageBtn);
-
-
         billUploadBtn = (Button)findViewById(R.id.billUploadBtn);
+
 
         pickImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,16 +58,15 @@ public class StoreDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final String token = "Token ";
-
                 final String access_token = SaveSharedPreference.getFBUserAccessToken(StoreDetailActivity.this);
-
                 String access_token_wo_quotes = access_token.replace("\"","");
-
                 final String s = token.concat(access_token_wo_quotes);
 
 
 
                 TypedFile typedFile = new TypedFile("multipart/form-data",new File((getPhotoFileUri(photoFileName).getPath())));
+
+                //Upload Bill
                 RestClient.get().uploadBill(s, typedFile, new Callback<Dummy>() {
                     @Override
                     public void success(Dummy dummy, Response response) {

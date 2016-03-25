@@ -14,6 +14,7 @@ public class UrbanHuntApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // initialized Facebook SDK
 
         FacebookSdk.sdkInitialize(getApplicationContext());
 

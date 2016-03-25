@@ -91,8 +91,13 @@ public class FacebookLogin extends AppCompatActivity {
                         Log.d("LoggedIn", "true");
                         Log.d("Keys", jsonObject.toString());
 
-                        SaveSharedPreference.setFBUserAccessToken(FacebookLogin.this,jsonObject.get("token").toString());
 
+
+                        SaveSharedPreference.setFBUserAccessToken(FacebookLogin.this, jsonObject.get("token").toString());
+
+
+                        Intent intent = new Intent(FacebookLogin.this,RegisterationIntentService.class);
+                        startService(intent);
 
 
                         new Handler().postDelayed(new Runnable() {
@@ -100,6 +105,7 @@ public class FacebookLogin extends AppCompatActivity {
                             public void run() {
                             /* Create an Intent that will start the Menu-Activity. */
                                 Intent mainIntent = new Intent(FacebookLogin.this, StoreDetailActivity.class);
+//                                Intent mainIntent = new Intent(FacebookLogin.this, LocationTestActivity.class);
                                 FacebookLogin.this.startActivity(mainIntent);
                                 FacebookLogin.this.finish();
                             }

@@ -26,7 +26,7 @@ public class LogoutActivity extends AppCompatActivity {
 
     String API = "http://192.168.1.104:8000/";
     final String CLIENT_ID = "8KHU8SRpTyG8dB0EnR8Z1Yyp5Ebo0rh0NW07uoTl";
-    Context c;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +35,15 @@ public class LogoutActivity extends AppCompatActivity {
         setContentView(R.layout.facebook_logout);
 
         facebookLogoutBtn = (Button)findViewById(R.id.logoutBtn);
+        context = this;
 
-
-        c = this;
-
-        final String a_t = SaveSharedPreference.getFBUserAccessToken(LogoutActivity.this);
-
-        Log.d("acc_tok", a_t);
-
-        String a_t_1 = a_t.replace("\"", "");
-
-        Log.d("acc_tok_without_quotes", a_t_1);
+//        final String a_t = SaveSharedPreference.getFBUserAccessToken(LogoutActivity.this);
+//
+//        Log.d("acc_tok", a_t);
+//
+//        String a_t_1 = a_t.replace("\"", "");
+//
+//        Log.d("acc_tok_without_quotes", a_t_1);
 
 
 
@@ -94,10 +92,15 @@ public class LogoutActivity extends AppCompatActivity {
                         public void success(Dummy dummy, Response response) {
 
                             Log.d("LoggedOut", "true");
+
+                            //Remove Access_token from shared preferences
                             SaveSharedPreference.removeFBUserAccessToken(LogoutActivity.this);
+
+                            //logout from facebook
                             LoginManager.getInstance().logOut();
 
-                            Intent i = new Intent(c,LoginPreferenceManagerActivity.class);
+                            //Move to Login Preference Activity
+                            Intent i = new Intent(context,LoginPreferenceManagerActivity.class);
                             startActivity(i);
 
                         }
@@ -110,7 +113,6 @@ public class LogoutActivity extends AppCompatActivity {
                     });
 
                 }
-
             }
         });
 

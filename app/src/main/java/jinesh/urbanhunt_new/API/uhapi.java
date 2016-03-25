@@ -5,7 +5,9 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 import jinesh.urbanhunt_new.Dummy;
+import jinesh.urbanhunt_new.model.Device;
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
@@ -60,4 +62,13 @@ public interface uhapi {
     @POST("/user_profile/upload/")
     public void uploadBill(@Header("Authorization") String auth_token,@Part("image") TypedFile image,Callback<Dummy> Response );
 
+
+//    @FormUrlEncoded
+//    @POST("/gcm/v1/device/register/")
+//    public void registerDevice(@Header("Authorization") String auth_token,@Header("Content-Type") String content_type,
+//                               @FieldMap Map<String,String> params, Callback<Dummy>Response);
+
+    @POST("/gcm/v1/device/register/")
+    public void registerDevice(@Header("Authorization") String auth_token,@Header("Content-Type") String content_type,
+                               @Body Device device, Callback<Dummy> Response);
 }

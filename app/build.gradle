@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 23
@@ -31,5 +30,10 @@ dependencies {
     compile 'com.android.support:design:23.+'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile "com.google.android.gms:play-services-gcm:8.3.0"
+    compile "com.google.android.gms:play-services-gcm:8.4.0"
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'

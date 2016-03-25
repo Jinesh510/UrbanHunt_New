@@ -9,6 +9,11 @@ import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 
+import jinesh.urbanhunt_new.model.Device;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 /**
  * Created by Jinesh on 22/03/16.
  */
@@ -45,7 +50,8 @@ public class RegisterationIntentService extends IntentService {
             Log.d(TAG, "GCM Registration Token: " + token);
 
             // pass along this data
-            sendRegistrationToServer(token);
+            String i = instanceID.getId();
+            sendRegistrationToServer(i,token);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,6 +59,44 @@ public class RegisterationIntentService extends IntentService {
 
     }
 
-    private void sendRegistrationToServer(String token) {
+    private void sendRegistrationToServer(String instance_id ,String reg_token) {
+
+
+        final String token = "Token ";
+
+        final String access_token = SaveSharedPreference.getFBUserAccessToken(this);
+
+        String access_token_wo_quotes = access_token.replace("\"","");
+
+        final String s = token.concat(access_token_wo_quotes);
+
+        String content_type = "application/json";
+
+//        HashMap<String,String> map = new HashMap<String, String>();
+//        map.put("dev_id",instance_id);
+//        map.put("reg_id",reg_token);
+//        map.put("name",access_token_wo_quotes);
+
+        Device device = new Device(instance_id,reg_token,access_token_wo_quotes);
+
+        RestClient.get().registerDevice(s, content_type, device,
+                new Callback<Dummy>() {
+                    @Override
+                    public void success(Dummy dummy, Response response) {
+
+                        Log.d("Device Registered","true");
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                        Log.d("Device Registered","false");
+
+
+                    }
+                });
+
+
     }
 }
