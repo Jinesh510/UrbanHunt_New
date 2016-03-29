@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/subSectorCard"
+        android:layout_margin="10dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/subSectorBackground"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Hello World"
+                android:id="@+id/brandName"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:fitsSystemWindows="true"
+                android:layout_gravity=""/>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Hello World"
+                android:id="@+id/brandDescription"
+                android:layout_below="@id/brandName"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="5dp"
+                android:id="@+id/storePoints"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentRight="true" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left|bottom"
+                android:id="@+id/brandLogo"
+                android:layout_below="@id/brandDescription"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

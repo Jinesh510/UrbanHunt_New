@@ -23,6 +23,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- Get Focus SDK permissions-->
+    <uses-permission android:name= "android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name= "android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name= "android.permission.BLUETOOTH"/>
+    <uses-permission android:name= "android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name= "android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name= "android.permission.RECEIVE_BOOT_COMPLETED"/>
+
 
 
 
@@ -96,6 +104,55 @@
         </service>
 
         <service android:name="jinesh.urbanhunt_new.RegisterationIntentService" android:exported="false"/>
+
+        <!-- Focus Environment Variables-->
+
+        <!--Add Focus Environment variable here possible values -[sandbox,prod]-->
+        <meta-data
+            android:name= "focus_env"
+            android:value= "sandbox" />
+        <!--Add Focus ClientIdentication key corresponding to above environment value-->
+        <meta-data
+            android:name= "focusKey"
+            android:value= "FED220FF7AD94DF5A4CD0D9FF23FB21D" />
+
+        <!--Add FocusSdkService entry here-->
+
+        <service
+            android:name= "com.focus.android.sdk.FocusSdkService"/>
+
+        <!--Add FocusSdkReceiver entry here-->
+
+        <receiver android:name= "com.focus.android.sdk.FocusSdkReceiver">
+            <intent-filter>
+                <action android:name= "android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name= "android.intent.action.BOOT_COMPLETED"/>
+                <action android:name= "android.intent.action.TIME_SET"/>
+                <action android:name= "android.intent.action.PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name= "com.focus.android.sdk.consensus.LocationProviderManager">
+            <intent-filter>
+                <action android:name= "android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme= "package"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name= "com.focus.intent.action.PREDICT_LOCATION"/>
+            </intent-filter>
+        </receiver>
+
+
+
+        <!--This is an optional entry, if you want frequent location updates then register a BroadcastReceiver with the following IntentFilter-->
+
+        <receiver android:name= "jinesh.urbanhunt_new.LocationReceiver">
+            <intent-filter>
+                <action android:name= "jinesh.urbanhunt_new.com.focus.PREDICTED_LOCATION"/>
+            </intent-filter>
+        </receiver>
+
+
 
 
 

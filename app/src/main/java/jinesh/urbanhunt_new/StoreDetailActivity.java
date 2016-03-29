@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.focus.android.sdk.FocusSdk;
+import com.focus.android.sdk.common.configuration.UserServiceLevel;
+import com.focus.android.sdk.services.exceptions.FocusSdkInitializationException;
+
 import java.io.File;
 
 import retrofit.Callback;
@@ -42,6 +46,47 @@ public class StoreDetailActivity extends AppCompatActivity {
         billImage = (ImageView)findViewById(R.id.billImage);
         pickImageBtn = (Button)findViewById(R.id.pickImageBtn);
         billUploadBtn = (Button)findViewById(R.id.billUploadBtn);
+
+        try {
+            UserServiceLevel serviceLevel = FocusSdk.getInstance().getUserState();
+
+            switch(serviceLevel) {
+
+                case BACKGROUND_TRACKING_OFF:
+                    //This indicates that all of the SDK's services except background tracking are enabled for the current user on the current device
+                    Log.d("background_tracking_off","true");
+                    break;
+
+                case ALL_SERVICES_ON:
+                    //This indicates that all of the SDK's services are enabled for the current user on the current device
+                    Log.d("all_services_on","true");
+                    break;
+
+
+                case LOCATION_SERVICES_OFF:
+                    //This indicates that all of the location related services (including background tracking + on demand tracking) are disabled for the current user on the current device
+                    Log.d("location_services","true");
+                    break;
+
+
+                case ALL_SERVICES_OFF:
+                    //This indicates that all of the analytics and location services of the SDK are disabled for the current user on the current device
+                    Log.d("all_services_off","true");
+                    break;
+
+
+            }
+
+
+        } catch (FocusSdkInitializationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FocusSdk.getInstance().predictLocation();
+        } catch (FocusSdkInitializationException e) {
+            e.printStackTrace();
+        }
 
 
         pickImageBtn.setOnClickListener(new View.OnClickListener() {

@@ -15,3 +15,23 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keepattributes *Annotation*
+-keep class com.focus.android.sdk.** {
+*;
+}
+#protostuff specific
+-keep class io.protostuff.** {
+*;
+}
+#gson specific
+-keep class com.gson.** {
+*;
+}
+-keep class sun.misc.Unsafe {
+*;
+}
+-keepattributes Signature
+-keepattributes InnerClasses
+-dontwarn sun.reflet.**
+-dontwarn io.protostuff.**

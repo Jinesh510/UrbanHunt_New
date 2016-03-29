@@ -2,10 +2,13 @@ package jinesh.urbanhunt_new.API;
 
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import jinesh.urbanhunt_new.Dummy;
 import jinesh.urbanhunt_new.model.Device;
+import jinesh.urbanhunt_new.model.Sectors;
+import jinesh.urbanhunt_new.model.Stores;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -15,6 +18,7 @@ import retrofit.http.Header;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
+import retrofit.http.Path;
 import retrofit.mime.TypedFile;
 
 /**
@@ -71,4 +75,22 @@ public interface uhapi {
     @POST("/gcm/v1/device/register/")
     public void registerDevice(@Header("Authorization") String auth_token,@Header("Content-Type") String content_type,
                                @Body Device device, Callback<Dummy> Response);
+
+
+    @POST("/company/sector/")
+    public void getSectors(@Header("Authorization") String auth_token, Callback<ArrayList<Sectors>> Response);
+
+
+
+    @POST("/company/stores/{sector_id}/{lat}/{lng}/")
+    public void getStores(@Header("Authorization") String auth_token,@Path("sector_id") int sector_id,
+                           @Path("lat") Float lat,@Path("lng") Float lng, Callback<ArrayList<Stores>>Response);
+
+
+    @POST("/company/stores/{sector_id}/sub_locality/{location}/")
+    public void getStores(@Header("Authorization") String auth_token,@Path("sector_id") int sector_id,
+                          @Path("location") String location, Callback<ArrayList<Stores>>Response);
+
+
 }
+
