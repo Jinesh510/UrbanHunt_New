@@ -37,7 +37,7 @@ public class LoginPreferenceManagerActivity extends Activity {
             Log.d("Access_token",SaveSharedPreference.getFBUserAccessToken(LoginPreferenceManagerActivity.this));
 
 //            Intent i = new Intent(LoginPreferenceManagerActivity.this,LogoutActivity.class);
-//            Intent i = new Intent(LoginPreferenceManagerActivity.this,StoreDetailActivity.class);
+//            Intent i = new Intent(LoginPreferenceManagerActivity.this,BillUploadActivity.class);
 //            Intent i = new Intent(LoginPreferenceManagerActivity.this,LocationTestActivity.class);
             Intent i = new Intent(LoginPreferenceManagerActivity.this,MainActivity.class);
             startActivity(i);

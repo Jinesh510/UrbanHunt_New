@@ -9,6 +9,7 @@ import jinesh.urbanhunt_new.Dummy;
 import jinesh.urbanhunt_new.model.Device;
 import jinesh.urbanhunt_new.model.Sectors;
 import jinesh.urbanhunt_new.model.Stores;
+import jinesh.urbanhunt_new.model.UserPoints;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -91,6 +92,8 @@ public interface uhapi {
     public void getStores(@Header("Authorization") String auth_token,@Path("sector_id") int sector_id,
                           @Path("location") String location, Callback<ArrayList<Stores>>Response);
 
+    @POST("/user_profile/points/")
+    public void getUserPoints(@Header("Authorization") String auth_token, Callback<UserPoints> Response);
 
 }
 

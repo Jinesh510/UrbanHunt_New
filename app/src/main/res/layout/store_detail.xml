@@ -1,31 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="12dp" android:id="@+id/storeDetailLayout">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/storeCard">
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:id="@+id/billImage"
-        android:layout_margin="10dp"
-        android:layout_centerHorizontal="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/brandImage"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/brandName"
+                android:text="McDonalds"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pickImageBtn"
-        android:layout_below="@+id/billImage"
-        android:text="Pick Image"
-        android:layout_centerHorizontal="true"></Button>
+        android:id="@+id/checkinBtn"
+        android:text="Check-in"
+        android:layout_below="@+id/storeCard"
+        android:layout_margin="10dp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/billUploadBtn"
-        android:layout_below="@+id/billImage"
-        android:text="Upload Bill"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"></Button>
+        android:id="@id/billUploadBtn"
+        android:text="Upload Receipt"
+        android:layout_alignParentBottom="true"/>
 
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:id="@+id/timeV">-->
+
+        <!--<ImageView />-->
+    <!--</View>-->
+    <!--<ImageView-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:id="@+id/billImage"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_centerHorizontal="true"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/pickImageBtn"-->
+        <!--android:layout_below="@+id/billImage"-->
+        <!--android:text="Pick Image"-->
+        <!--android:layout_centerHorizontal="true"></Button>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/billUploadBtn"-->
+        <!--android:layout_below="@+id/billImage"-->
+        <!--android:text="Upload Bill"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:visibility="invisible"></Button>-->
 
 </RelativeLayout>

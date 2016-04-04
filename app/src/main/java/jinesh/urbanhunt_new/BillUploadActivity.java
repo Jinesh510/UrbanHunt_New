@@ -28,7 +28,7 @@ import retrofit.mime.TypedFile;
 /**
  * Created by Jinesh on 22/03/16.
  */
-public class StoreDetailActivity extends AppCompatActivity {
+public class BillUploadActivity extends AppCompatActivity {
 
     Button billUploadBtn;
     ImageView billImage;
@@ -41,7 +41,7 @@ public class StoreDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.store_detail);
+        setContentView(R.layout.bill_upload_frag);
 
         billImage = (ImageView)findViewById(R.id.billImage);
         pickImageBtn = (Button)findViewById(R.id.pickImageBtn);
@@ -103,7 +103,7 @@ public class StoreDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final String token = "Token ";
-                final String access_token = SaveSharedPreference.getFBUserAccessToken(StoreDetailActivity.this);
+                final String access_token = SaveSharedPreference.getFBUserAccessToken(BillUploadActivity.this);
                 String access_token_wo_quotes = access_token.replace("\"","");
                 final String s = token.concat(access_token_wo_quotes);
 
@@ -117,13 +117,13 @@ public class StoreDetailActivity extends AppCompatActivity {
                     public void success(Dummy dummy, Response response) {
 
                         String a = "Uploaded";
-                        Toast.makeText(StoreDetailActivity.this,a,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BillUploadActivity.this,a,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
 
-                        Toast.makeText(StoreDetailActivity.this,"Failed to Upload",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BillUploadActivity.this,"Failed to Upload",Toast.LENGTH_SHORT).show();
 
 
                     }

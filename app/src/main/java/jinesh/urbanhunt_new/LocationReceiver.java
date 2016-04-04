@@ -11,10 +11,15 @@ import com.focus.android.sdk.common.location.FAGPSData;
 import com.focus.android.sdk.common.location.FALocation;
 import com.focus.android.sdk.services.impl.LocationUtils;
 
+import jinesh.urbanhunt_new.Activity.StoreDetailActivity;
+
 /**
  * Created by Jinesh on 26/03/16.
  */
 public class LocationReceiver extends BroadcastReceiver {
+
+    StoreDetailActivity mStoreDetailActivity;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -24,11 +29,15 @@ public class LocationReceiver extends BroadcastReceiver {
         if( infoWrapper != null ){
             Log.d("info_wrapper","true");
 
-        //Successful Location Prediction
+            mStoreDetailActivity = new StoreDetailActivity();
+
+            //Successful Location Prediction
             FALocation locationObject = infoWrapper.getLocationObject();
             if (locationObject.isLocationAvailable()) {
                 //Now use the locationObject for location update
                 Log.d("loc_obj_available","true");
+
+                mStoreDetailActivity.IsAtLocation(true);
 
             }
 
@@ -42,6 +51,11 @@ public class LocationReceiver extends BroadcastReceiver {
                     FAGPSData gpsData = locationObject.getGpsData();
                     Log.d("gps_available","true");
                     Log.d("gps_data",gpsData.toString());
+
+
+                    float mLat= (float)gpsData.getLatitude();
+                    float mLng = (float)gpsData.getLongitude();
+                    mStoreDetailActivity.OnDataReceive(mLat,mLng);
                 }
                 else {
                     Log.d("gps_available","false");

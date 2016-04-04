@@ -9,15 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
+import jinesh.urbanhunt_new.Activity.StoreDetailActivity;
 import jinesh.urbanhunt_new.Adapters.StoresRecyclerViewAdapter;
 import jinesh.urbanhunt_new.ItemClickSupport;
 import jinesh.urbanhunt_new.R;
 import jinesh.urbanhunt_new.RestClient;
 import jinesh.urbanhunt_new.SaveSharedPreference;
-import jinesh.urbanhunt_new.StoreDetailActivity;
 import jinesh.urbanhunt_new.model.Sectors;
 import jinesh.urbanhunt_new.model.Stores;
 import retrofit.Callback;
@@ -27,7 +30,7 @@ import retrofit.client.Response;
 /**
  * Created by Jinesh on 27/03/16.
  */
-public class StoresListFragment extends Fragment {
+public class StoresListFragment extends Fragment{
 
     RecyclerView storesRecyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -38,6 +41,9 @@ public class StoresListFragment extends Fragment {
     int sector_id;
     ArrayList<Stores> mStores;
     String sub_locality;
+    AutoCompleteTextView mLocationSearchTxt;
+    Button mLocationSearchBtn;
+    String sub_localityTxt;
 
 
 
@@ -83,6 +89,19 @@ public class StoresListFragment extends Fragment {
 
         sub_locality = getArguments().getString("sub_locality");
 
+        ArrayList<String> sub_locality_list = new ArrayList<>();
+
+        sub_locality_list.add("Malad East");
+        sub_locality_list.add("Kandivali East");
+
+        mLocationSearchTxt = (AutoCompleteTextView)view.findViewById(R.id.locationSearchTxt);
+        mLocationSearchBtn = (Button)view.findViewById(R.id.locationSearchBtn);
+
+        ArrayAdapter<String> sub_locality_adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.autocomplete_tv_item,sub_locality_list);
+
+        mLocationSearchTxt.setAdapter(sub_locality_adapter);
+        mLocationSearchTxt.setThreshold(1);
 
         layoutManager = new LinearLayoutManager(getContext());
 
@@ -99,6 +118,9 @@ public class StoresListFragment extends Fragment {
             RestClient.get().getStores(s, sector_id, latitude, longitude, new Callback<ArrayList<Stores>>() {
                 @Override
                 public void success(ArrayList<Stores> stores, Response response) {
+
+                    sub_localityTxt = stores.get(1).getSub_locality();
+                    mLocationSearchTxt.setText(sub_localityTxt);
 
 //                    for (int i = 0; i < stores.size(); i++) {
 //                        mStores.add(stores.get(i));
@@ -118,7 +140,7 @@ public class StoresListFragment extends Fragment {
 //                        @Override
 //                        public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 //
-//                            Intent i = new Intent(getActivity(), StoreDetailActivity.class);
+//                            Intent i = new Intent(getActivity(), BillUploadActivity.class);
 //                            Stores store = mStores.get(position);
 ////                            int store_id = store.getStore();
 //                            i.putExtra("store_id",position);
@@ -136,14 +158,54 @@ public class StoresListFragment extends Fragment {
             });
         }
 
-        if(sub_locality != null){
+//        if(sub_locality != null){
+//
+//            RestClient.get().getStores(s, sector_id, sub_locality, new Callback<ArrayList<Stores>>() {
+//                @Override
+//                public void success(ArrayList<Stores> stores, Response response) {
+//
+//
+//                    setAdapterView(stores);
+//
+//                    startDetailActivity(storesRecyclerView);
+//
+////                    for (int i = 0; i < stores.size(); i++) {
+////                        mStores.add(stores.get(i));
+////                    }
+////
+////                    storesRecyclerView.setHasFixedSize(true);
+////                    storesRecyclerView.setLayoutManager(layoutManager);
+////
+////                    storesRecyclerView.setAdapter(mStoresRecyclerViewAdapter);
+////                    mStoresRecyclerViewAdapter.notifyDataSetChanged();
+//
+//
+//                }
+//
+//                @Override
+//                public void failure(RetrofitError error) {
+//
+//                }
+//            });
+//
+//        }
 
-            RestClient.get().getStores(s, sector_id, sub_locality, new Callback<ArrayList<Stores>>() {
+        mLocationSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mStores.clear();
+                String locationTxt = mLocationSearchTxt.getText().toString();
+
+                RestClient.get().getStores(s, sector_id, locationTxt, new Callback<ArrayList<Stores>>() {
                 @Override
                 public void success(ArrayList<Stores> stores, Response response) {
 
+                    for (int i = 0; i < stores.size(); i++) {
+                        mStores.add(stores.get(i));
+                    }
 
-                    setAdapterView(stores);
+                    mStoresRecyclerViewAdapter.updateList(mStores);
 
                     startDetailActivity(storesRecyclerView);
 
@@ -166,7 +228,10 @@ public class StoresListFragment extends Fragment {
                 }
             });
 
-        }
+
+            }
+        });
+
 
 
         return view;
@@ -196,6 +261,7 @@ public class StoresListFragment extends Fragment {
                 Stores store = mStores.get(position);
                 int store_id = store.getId();
                 i.putExtra("store_id",store_id);
+                i.putExtra("store_object",store);
 //                i.putExtra("")
                 startActivity(i);
 
@@ -204,8 +270,6 @@ public class StoresListFragment extends Fragment {
 
 
 
-
-
-
     }
+
 }

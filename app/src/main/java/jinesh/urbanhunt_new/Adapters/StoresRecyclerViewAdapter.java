@@ -1,11 +1,13 @@
 package jinesh.urbanhunt_new.Adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import jinesh.urbanhunt_new.R;
 import jinesh.urbanhunt_new.model.Stores;
 
 /**
@@ -17,11 +19,15 @@ public class StoresRecyclerViewAdapter extends RecyclerView.Adapter<StoresRecycl
 
     @Override
     public StoresRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sector_item,parent,false);
+        ViewHolder mViewHolder = new ViewHolder(view);
+
+        return mViewHolder;
     }
 
     @Override
     public void onBindViewHolder(StoresRecyclerViewAdapter.ViewHolder holder, int position) {
+
 
     }
 
@@ -41,5 +47,10 @@ public class StoresRecyclerViewAdapter extends RecyclerView.Adapter<StoresRecycl
 
 
         }
+    }
+
+    public void updateList(ArrayList<Stores> data) {
+        mStores = data;
+        notifyDataSetChanged();
     }
 }

@@ -48,6 +48,8 @@ public class StoresListActivity extends AppCompatActivity implements GoogleApiCl
     LocationRequest mLocationRequest = null;
     ProgressBar pb;
 
+
+
     final int REQUEST_CHECK_SETTINGS = 1234;
 
     @Override
@@ -250,6 +252,12 @@ public class StoresListActivity extends AppCompatActivity implements GoogleApiCl
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    public void setLocationSearch( String sub_location){
+
+
 
     }
 }

@@ -73,7 +73,7 @@
 
         <activity android:name=".LoginPreferenceManagerActivity"></activity>
 
-        <activity android:name=".StoreDetailActivity"></activity>
+        <activity android:name=".BillUploadActivity"></activity>
 
         <activity android:name=".LocationTestActivity"></activity>
 
