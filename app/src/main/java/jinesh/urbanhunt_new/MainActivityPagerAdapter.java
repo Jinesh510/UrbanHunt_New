@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import jinesh.urbanhunt_new.Fragments.DealsFragment;
+
 /**
  * Created by Jinesh on 26/03/16.
  */
@@ -28,13 +30,13 @@ public class MainActivityPagerAdapter extends FragmentStatePagerAdapter {
         Class fragmentClass;
         switch(position) {
             case 0:
-//                fragment = ProductListFragment.newInstance();
+                fragment = DealsFragment.newInstance();
                 return fragment;
             case 1:
-//                fragment = SelectCategoryFragment.newInstance();
+                fragment = DealsFragment.newInstance();
                 return fragment;
             case 2:
-//                fragment = BrandFragment.newInstance();
+                fragment = DealsFragment.newInstance();
                 return fragment;
 
 //                fragment = BrandFragment.newInstance();

@@ -7,8 +7,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="eg.Malad East"
-        android:id="@+id/locationSearchTxt"
-        android:layout_below="@+id/toolbar"/>
+        android:id="@+id/locationSearchTxt"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -16,7 +15,6 @@
         android:text="Search"
         android:id="@+id/locationSearchBtn"
         android:layout_toRightOf="@+id/locationSearchTxt"
-        android:layout_below="@id/toolbar"
         android:layout_alignParentRight="true"/>
 
     <android.support.v7.widget.RecyclerView

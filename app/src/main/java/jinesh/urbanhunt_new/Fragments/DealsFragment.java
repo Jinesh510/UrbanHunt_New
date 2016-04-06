@@ -50,7 +50,7 @@ public class DealsFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
 
-        mDealsRecyclerViewAdapter = new DealsRecyclerViewAdapter(mSectors);
+        mDealsRecyclerViewAdapter = new DealsRecyclerViewAdapter(getActivity(),mSectors);
 
 
         final String token = "Token ";
@@ -66,9 +66,18 @@ public class DealsFragment extends Fragment {
 
 
                 for (int i = 0; i < sectors.size(); i++) {
-                    Sectors sec = new Sectors(sectors.get(i).getId(),sectors.get(i).getLabel());
-                    mSectors.add(sec);
+//                    Sectors sec = new Sectors(sectors.get(i).getId(),sectors.get(i).getLabel(),sectors.get(i).getBackgroundImg());
+                    if(sectors.get(i) != null){
+                        Log.d("sector_obj",sectors.get(i).toString());
+                    }
+
+                    mSectors.add(sectors.get(i));
+//                    mSectors.add(sec);
+                    Log.d("AddSector","true");
                 }
+
+                int size = mSectors.size();
+                Log.d("mSectors", size + "" );
 
                 sectorRecyclerView.setHasFixedSize(true);
                 sectorRecyclerView.setLayoutManager(layoutManager);
@@ -106,6 +115,6 @@ public class DealsFragment extends Fragment {
             }
         });
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }

@@ -18,10 +18,22 @@ import jinesh.urbanhunt_new.Activity.StoreDetailActivity;
  */
 public class LocationReceiver extends BroadcastReceiver {
 
-    StoreDetailActivity mStoreDetailActivity;
+    public interface UHLocationListener{
+
+        void DataReceive(float mLat,float mLng);
+        void isAtLocation(boolean atLocation);
+    }
+
+    private static UHLocationListener listener;
+
+    public void setListener(UHLocationListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        StoreDetailActivity mStoreDetailActivity = new StoreDetailActivity();
 
 
         //On Receiving the location broadcast, use following code to get the location object
@@ -29,7 +41,7 @@ public class LocationReceiver extends BroadcastReceiver {
         if( infoWrapper != null ){
             Log.d("info_wrapper","true");
 
-            mStoreDetailActivity = new StoreDetailActivity();
+//            mStoreDetailActivity = new StoreDetailActivity();
 
             //Successful Location Prediction
             FALocation locationObject = infoWrapper.getLocationObject();
@@ -37,7 +49,11 @@ public class LocationReceiver extends BroadcastReceiver {
                 //Now use the locationObject for location update
                 Log.d("loc_obj_available","true");
 
-                mStoreDetailActivity.IsAtLocation(true);
+                if(listener !=null){
+
+                    listener.isAtLocation(true);
+                }
+//                mStoreDetailActivity.IsAtLocation(true);
 
             }
 
@@ -55,7 +71,19 @@ public class LocationReceiver extends BroadcastReceiver {
 
                     float mLat= (float)gpsData.getLatitude();
                     float mLng = (float)gpsData.getLongitude();
-                    mStoreDetailActivity.OnDataReceive(mLat,mLng);
+
+                    if(listener!=null)
+
+                    {
+                        listener.DataReceive(mLat,mLng);
+                    }
+
+//
+//                    if(mLat != 0){
+//
+//                        Log.d("mLat",mLat+"");
+////                        mStoreDetailActivity.OnDataReceive(mLat, mLng);
+//                    }
                 }
                 else {
                     Log.d("gps_available","false");
@@ -73,4 +101,7 @@ public class LocationReceiver extends BroadcastReceiver {
 
         }
     }
+
+
+
 }

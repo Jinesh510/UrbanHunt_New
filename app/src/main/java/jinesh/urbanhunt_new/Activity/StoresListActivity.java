@@ -76,10 +76,10 @@ public class StoresListActivity extends AppCompatActivity implements GoogleApiCl
                     .build();
         }
 
-
-        Fragment storesListFragment = StoresListFragment.newInstance(sector_id);
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, storesListFragment).commit();
+//
+//        Fragment storesListFragment = StoresListFragment.newInstance(sector_id);
+//        FragmentManager fragmentManager = this.getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.flContent, storesListFragment).commit();
 
 
 
@@ -238,6 +238,8 @@ public class StoresListActivity extends AppCompatActivity implements GoogleApiCl
 
         mLastLocation = location;
         if(mLastLocation != null){
+
+            Log.d("OnlocChanged","true");
             mLatitude = (float)mLastLocation.getLatitude();
             mLongitude = (float) mLastLocation.getLongitude();
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,StoresListActivity.this);
@@ -256,6 +258,7 @@ public class StoresListActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     public void setLocationSearch( String sub_location){
+
 
 
 

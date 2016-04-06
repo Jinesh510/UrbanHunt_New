@@ -40,6 +40,7 @@ public class LoginPreferenceManagerActivity extends Activity {
 //            Intent i = new Intent(LoginPreferenceManagerActivity.this,BillUploadActivity.class);
 //            Intent i = new Intent(LoginPreferenceManagerActivity.this,LocationTestActivity.class);
             Intent i = new Intent(LoginPreferenceManagerActivity.this,MainActivity.class);
+//            Intent i = new Intent(LoginPreferenceManagerActivity.this,StoresListDummyActivity.class);
             startActivity(i);
 
         }

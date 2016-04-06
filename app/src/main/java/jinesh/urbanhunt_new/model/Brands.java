@@ -3,14 +3,21 @@ package jinesh.urbanhunt_new.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Jinesh on 27/03/16.
  */
-public class Brands {
+public class Brands implements Serializable{
 
-    @SerializedName("brand_email")
+    @SerializedName("brand_name")
     @Expose
-    private String brandEmail;
+    private String brandName;
+
+    @SerializedName("background")
+    @Expose
+    private String background;
+
     @SerializedName("description")
     @Expose
     private String description;
@@ -24,22 +31,21 @@ public class Brands {
     @Expose
     private int cashback;
 
-    /**
-     *
-     * @return
-     * The brandEmail
-     */
-    public String getBrandEmail() {
-        return brandEmail;
+
+    public String getBrandName() {
+        return brandName;
     }
 
-    /**
-     *
-     * @param brandEmail
-     * The brand_email
-     */
-    public void setBrandEmail(String brandEmail) {
-        this.brandEmail = brandEmail;
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
     }
 
     /**

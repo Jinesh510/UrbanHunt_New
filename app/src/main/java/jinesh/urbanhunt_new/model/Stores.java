@@ -14,8 +14,6 @@ public class Stores implements Serializable {
     String discount;
     int id;
     Brands brand;
-
-
     String sub_locality;
 
 

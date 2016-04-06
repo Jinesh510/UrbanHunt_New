@@ -7,7 +7,7 @@ public class Sectors {
 
     private int id;
     private String label;
-    String background;
+    private String background;
 
     public String getBackgroundImg() {
         return background;
@@ -17,9 +17,10 @@ public class Sectors {
         this.background = backgroundImg;
     }
 
-    public Sectors(int id, String label) {
+    public Sectors(int id, String label,String background) {
         this.id = id;
         this.label = label;
+        this.background = background;
     }
 
     public int getId() {

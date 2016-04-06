@@ -15,6 +15,7 @@ import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
+import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
@@ -78,22 +79,27 @@ public interface uhapi {
                                @Body Device device, Callback<Dummy> Response);
 
 
-    @POST("/company/sector/")
+    @GET("/company/sector/")
     public void getSectors(@Header("Authorization") String auth_token, Callback<ArrayList<Sectors>> Response);
 
 
 
-    @POST("/company/stores/{sector_id}/{lat}/{lng}/")
+    @GET("/company/stores/{sector_id}/{lat}/{lng}/")
     public void getStores(@Header("Authorization") String auth_token,@Path("sector_id") int sector_id,
                            @Path("lat") Float lat,@Path("lng") Float lng, Callback<ArrayList<Stores>>Response);
 
 
-    @POST("/company/stores/{sector_id}/sub_locality/{location}/")
+    @GET("/company/stores/{sector_id}/sub_locality/{location}/")
     public void getStores(@Header("Authorization") String auth_token,@Path("sector_id") int sector_id,
                           @Path("location") String location, Callback<ArrayList<Stores>>Response);
 
-    @POST("/user_profile/points/")
+    @GET("/company/stores/{sector_id}/")
+    public void getStores(@Header("Authorization") String auth_token,@Path("sector_id") int sector_id,
+                          Callback<ArrayList<Stores>>Response);
+
+    @GET("/user_profile/points/")
     public void getUserPoints(@Header("Authorization") String auth_token, Callback<UserPoints> Response);
+
 
 }
 

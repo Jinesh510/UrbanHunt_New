@@ -1,11 +1,15 @@
 package jinesh.urbanhunt_new.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,9 +23,12 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
 
     private ArrayList<Sectors> mSectors;
+    Context context;
 
-    public DealsRecyclerViewAdapter(ArrayList<Sectors> mSectors) {
+    public DealsRecyclerViewAdapter(Context context,ArrayList<Sectors> mSectors) {
+        this.context = context;
         this.mSectors = mSectors;
+        Log.d("DealsAdapter","true");
     }
 
 
@@ -38,9 +45,10 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
     @Override
     public DealsRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sector_item,parent,false);
         ViewHolder mViewHolder = new ViewHolder(view);
-
+        Log.d("onCreateVH","true");
         return mViewHolder;
     }
 
@@ -49,6 +57,8 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
         Sectors sector = mSectors.get(position);
         holder.sectorName.setText(sector.getLabel());
+        Picasso.with(context).load(sector.getBackgroundImg()).into(holder.sectorBackground);
+        Log.d("onBind","true");
 
 
     }
@@ -69,6 +79,8 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
             sectorName = (TextView)itemView.findViewById(R.id.sectorName);
             sectorBackground = (ImageView) itemView.findViewById(R.id.sectorBackground);
+
+            Log.d("ViewHolder","true");
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

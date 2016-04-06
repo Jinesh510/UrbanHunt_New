@@ -16,9 +16,7 @@ import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 
-import jinesh.urbanhunt_new.API.uhapi;
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -29,7 +27,7 @@ public class FacebookLogin extends AppCompatActivity {
 
     LoginButton facebookLoginBtn;
     CallbackManager callbackManager;
-    String API = "http://192.168.1.104:8000/";
+    String API = "http://192.168.1.101:8000/";
 //    final String CLIENT_ID = "ejIbSPISZLcilHNiRaArwKKUgTTOAeHPXXZEJqVc";
     final String CLIENT_ID = "8KHU8SRpTyG8dB0EnR8Z1Yyp5Ebo0rh0NW07uoTl";
 
@@ -70,11 +68,11 @@ public class FacebookLogin extends AppCompatActivity {
 //
 //                }
 
-
-                RestAdapter restAdapter = new RestAdapter.Builder().
-                        setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).build();
-
-                uhapi uh = restAdapter.create(uhapi.class);
+//
+//                RestAdapter restAdapter = new RestAdapter.Builder().
+//                        setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).build();
+//
+//                uhapi uh = restAdapter.create(uhapi.class);
 
                 HashMap<String, String> fbLoginMap = new HashMap<String, String>();
 
@@ -85,18 +83,17 @@ public class FacebookLogin extends AppCompatActivity {
                 fbLoginMap.put("token", loginResult.getAccessToken().getToken());
 
 
-                uh.facebookLoginUser(fbLoginMap, new Callback<JsonObject>() {
+                RestClient.get().facebookLoginUser(fbLoginMap, new Callback<JsonObject>() {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         Log.d("LoggedIn", "true");
                         Log.d("Keys", jsonObject.toString());
 
 
-
                         SaveSharedPreference.setFBUserAccessToken(FacebookLogin.this, jsonObject.get("token").toString());
 
 
-                        Intent intent = new Intent(FacebookLogin.this,RegisterationIntentService.class);
+                        Intent intent = new Intent(FacebookLogin.this, RegisterationIntentService.class);
                         startService(intent);
 
 
@@ -104,7 +101,7 @@ public class FacebookLogin extends AppCompatActivity {
                             @Override
                             public void run() {
                             /* Create an Intent that will start the Menu-Activity. */
-                                Intent mainIntent = new Intent(FacebookLogin.this, BillUploadActivity.class);
+                                Intent mainIntent = new Intent(FacebookLogin.this, MainActivity.class);
 //                                Intent mainIntent = new Intent(FacebookLogin.this, LocationTestActivity.class);
                                 FacebookLogin.this.startActivity(mainIntent);
                                 FacebookLogin.this.finish();

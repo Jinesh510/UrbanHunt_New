@@ -77,6 +77,14 @@
 
         <activity android:name=".LocationTestActivity"></activity>
 
+        <activity android:name=".Activity.StoresListActivity"></activity>
+
+        <activity android:name=".Activity.HomeActivity"></activity>
+
+        <activity android:name=".Activity.StoreDetailActivity"></activity>
+
+        <activity android:name=".Activity.StoresListDummyActivity"></activity>
+
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
