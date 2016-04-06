@@ -31,5 +31,9 @@ public class RestClient {
         REST_CLIENT = restAdapter.create(uhapi.class);
     }
 
+    public static String getRootURL(){
+        return ROOT;
+    }
+
 
 }

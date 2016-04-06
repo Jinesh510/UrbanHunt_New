@@ -24,6 +24,8 @@ public class StoresRecyclerViewAdapter extends RecyclerView.Adapter<StoresRecycl
 
     private ArrayList<Stores> mStores;
     Context context;
+    final String ROOT = "http://192.168.1.104:8000";
+
 
     public StoresRecyclerViewAdapter(Context context,ArrayList<Stores> mStores) {
         this.context = context;
@@ -47,9 +49,14 @@ public class StoresRecyclerViewAdapter extends RecyclerView.Adapter<StoresRecycl
         Stores mStore = mStores.get(position);
         Brands mBrand = mStore.getBrand();
 
+        String LogoUrl = ROOT + mBrand.getLogo();
+        String BackgroundUrl = ROOT + mBrand.getBackground();
+
+
+
         holder.brandName.setText(mBrand.getBrandName());
-        Picasso.with(context).load(mBrand.getLogo()).into(holder.brandLogo);
-        Picasso.with(context).load(mBrand.getBackground()).into(holder.brandBackground);
+        Picasso.with(context).load(LogoUrl).into(holder.brandLogo);
+        Picasso.with(context).load(BackgroundUrl).into(holder.brandBackground);
         holder.brandDescription.setText(mBrand.getDescription());
         holder.storePoints.setText(mBrand.getCashback() + "");
 
