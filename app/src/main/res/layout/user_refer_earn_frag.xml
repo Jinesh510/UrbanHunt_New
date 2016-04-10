@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referralIV"
+        android:layout_above="@+id/referralCodeTxt"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referralCodeTxt"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invite friends to make your experience more enjoyable. Your friends earn 200 points and you
+        earn 50 points once the make a purchase"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/referralCodeTxt"
+        android:id="@+id/referralTxt"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/referralBtn"
+        android:text="Invite Friends"
+        android:background="#000000"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

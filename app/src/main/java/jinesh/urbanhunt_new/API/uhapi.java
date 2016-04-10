@@ -9,6 +9,7 @@ import jinesh.urbanhunt_new.Dummy;
 import jinesh.urbanhunt_new.model.Device;
 import jinesh.urbanhunt_new.model.Sectors;
 import jinesh.urbanhunt_new.model.Stores;
+import jinesh.urbanhunt_new.model.Transactions;
 import jinesh.urbanhunt_new.model.UserPoints;
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -99,6 +100,9 @@ public interface uhapi {
 
     @GET("/user_profile/points/")
     public void getUserPoints(@Header("Authorization") String auth_token, Callback<UserPoints> Response);
+
+    @GET("/user_profile/bills/")
+    public void getUserTransactions(@Header("Authorization") String auth_token, Callback<ArrayList<Transactions>> Response);
 
 
 }

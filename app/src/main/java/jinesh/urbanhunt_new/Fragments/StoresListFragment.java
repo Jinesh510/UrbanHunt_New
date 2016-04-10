@@ -97,7 +97,7 @@ public class StoresListFragment extends Fragment{
         ArrayList<String> sub_locality_list = new ArrayList<>();
 
         sub_locality_list.add("Malad East");
-        sub_locality_list.add("Kandivali East");
+        sub_locality_list.add("Andheri East");
         sub_locality_list.add("All");
 
         mLocationSearchTxt = (AutoCompleteTextView)view.findViewById(R.id.locationSearchTxt);

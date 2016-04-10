@@ -30,7 +30,16 @@ public class SaveSharedPreference {
     public static void removeFBUserAccessToken(Context ctx){
 
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(USER_ACCESS_TOKEN, "missing");;
+        editor.commit();
+    }
+
+
+    public static void removeSharedPreference(Context ctx){
+
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.clear();
         editor.commit();
+
     }
 }

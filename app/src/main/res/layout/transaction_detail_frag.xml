@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:id="@+id/billImage"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/transaction_meta"
+        android:layout_below="@+id/billImage">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/billAmountTxt"
+            android:layout_gravity="right|bottom"
+            android:text="Bill Amt."
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/billStatusTxt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/billStatusTxt"
+            android:layout_gravity="right|top"
+            android:layout_margin="10dp"
+            android:text="Bill Status"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pointsEarnedTxt"
+            android:text="Points Earned"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

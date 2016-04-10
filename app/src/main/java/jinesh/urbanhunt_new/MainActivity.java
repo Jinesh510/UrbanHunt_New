@@ -1,5 +1,6 @@
 package jinesh.urbanhunt_new;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import jinesh.urbanhunt_new.Activity.NavigationDrawerActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -95,25 +98,42 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        int nav_id =1;
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_points) {
+            // Handle the points action
+            nav_id = 1;
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_transactions) {
+            nav_id = 2;
+
+        } else if (id == R.id.nav_promotions) {
+
+            nav_id = 3;
+
+
+        } else if (id == R.id.nav_refer_earn) {
+
+            nav_id = 4;
 
         } else if (id == R.id.nav_share) {
-
+            nav_id = 5;
         } else if (id == R.id.nav_send) {
-
+            nav_id = 6;
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        Intent i = new Intent(MainActivity.this, NavigationDrawerActivity.class);
+        i.putExtra("id",nav_id);
+        startActivity(i);
+
         return true;
     }
 }
