@@ -50,7 +50,7 @@ public class DealsFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
 
-        mDealsRecyclerViewAdapter = new DealsRecyclerViewAdapter(getActivity(),mSectors);
+//        sectorRecyclerView.setAdapter(mDealsRecyclerViewAdapter);
 
 
         final String token = "Token ";
@@ -78,6 +78,7 @@ public class DealsFragment extends Fragment {
 
                 int size = mSectors.size();
                 Log.d("mSectors", size + "" );
+                mDealsRecyclerViewAdapter = new DealsRecyclerViewAdapter(getActivity(),mSectors);
 
                 sectorRecyclerView.setHasFixedSize(true);
                 sectorRecyclerView.setLayoutManager(layoutManager);

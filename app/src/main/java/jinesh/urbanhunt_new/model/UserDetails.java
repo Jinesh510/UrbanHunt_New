@@ -5,16 +5,16 @@ package jinesh.urbanhunt_new.model;
  */
 public class UserDetails {
 
-    String referalcode;
-    String referalcode_used;
+    String referralcode;
+    String referralcode_used;
     String image;
 
     public String getReferalcode() {
-        return referalcode;
+        return referralcode;
     }
 
     public String getReferalcode_used() {
-        return referalcode_used;
+        return referralcode_used;
     }
 
 

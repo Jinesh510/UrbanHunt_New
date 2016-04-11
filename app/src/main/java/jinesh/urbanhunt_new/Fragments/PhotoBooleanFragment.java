@@ -10,16 +10,22 @@ import android.view.ViewGroup;
 import jinesh.urbanhunt_new.R;
 
 /**
- * Created by Jinesh on 27/03/16.
+ * Created by Jinesh on 10/04/16.
  */
-public class UserProfileFragment extends Fragment {
+public class PhotoBooleanFragment extends Fragment {
 
+    public static PhotoBooleanFragment newInstance() {
+        PhotoBooleanFragment fragment = new PhotoBooleanFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.user_profile_frag, container, false);
+        View view = inflater.inflate(R.layout.photo_boolean_frag, container, false);
 
         return view;
     }

@@ -24,7 +24,7 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
     private ArrayList<Sectors> mSectors;
     Context context;
-    final String ROOT = "http://192.168.1.104:8000";
+    final String ROOT = "http://uhtest.herokuapp.com";
 
     public DealsRecyclerViewAdapter(Context context,ArrayList<Sectors> mSectors) {
         this.context = context;
@@ -74,8 +74,8 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView sectorName;
-        public ImageView sectorBackground;
+        TextView sectorName;
+        ImageView sectorBackground;
 
 
         public ViewHolder(final View itemView) {

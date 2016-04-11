@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import jinesh.urbanhunt_new.R;
+import jinesh.urbanhunt_new.SaveSharedPreference;
 
 /**
  * Created by Jinesh on 27/03/16.
@@ -24,6 +25,7 @@ public class UserReferEarnFragment extends Fragment {
     TextView mReferralTxt;
     Button mReferralBtn;
     TextView mReferralCodeTxt;
+    String mReferralCode;
 
     public static UserReferEarnFragment newInstance() {
         UserReferEarnFragment fragment = new UserReferEarnFragment();
@@ -49,6 +51,8 @@ public class UserReferEarnFragment extends Fragment {
 
         mReferralIV.setImageBitmap(referral_icon);
 
+        mReferralCode = SaveSharedPreference.getUserReferralCode(getActivity());
+        mReferralCodeTxt.setText(mReferralCode);
 
         mReferralBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +72,8 @@ public class UserReferEarnFragment extends Fragment {
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, use this code to join UrbanHunt and earn 200 free points ");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, use this code to join UrbanHunt and earn 200 free points "+
+        mReferralCode);
         startActivity(Intent.createChooser(shareIntent, "Share link using"));
 
     }

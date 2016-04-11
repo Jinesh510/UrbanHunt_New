@@ -24,7 +24,7 @@ public class StoresRecyclerViewAdapter extends RecyclerView.Adapter<StoresRecycl
 
     private ArrayList<Stores> mStores;
     Context context;
-    final String ROOT = "http://192.168.1.104:8000";
+    final String ROOT = "http://uhtest.herokuapp.com";
 
 
     public StoresRecyclerViewAdapter(Context context,ArrayList<Stores> mStores) {

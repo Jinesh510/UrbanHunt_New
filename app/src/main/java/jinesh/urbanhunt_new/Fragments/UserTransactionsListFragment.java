@@ -1,9 +1,9 @@
 package jinesh.urbanhunt_new.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import jinesh.urbanhunt_new.Activity.StoreDetailActivity;
 import jinesh.urbanhunt_new.Adapters.TransactionsRecyclerViewAdapter;
 import jinesh.urbanhunt_new.ItemClickSupport;
 import jinesh.urbanhunt_new.R;
@@ -64,21 +63,24 @@ public class UserTransactionsListFragment extends Fragment {
             @Override
             public void success(ArrayList<Transactions> transactions, Response response) {
 
-                Log.d("All_Transactions", "success");
-                Log.d("Transactions_Size", "" + transactions.size());
+                Log.d("Trans_Success", "true");
+                if (transactions !=null){
+                    Log.d("All_Transactions", "success");
+                    Log.d("Transactions_Size", "" + transactions.size());
 
-                for (int i = 0; i < transactions.size(); i++) {
+                    for (int i = 0; i < transactions.size(); i++) {
 
-                    mTransactions.add(transactions.get(i));
+                        mTransactions.add(transactions.get(i));
 
+                    }
+
+                    mTransactionRecyclerView.setHasFixedSize(true);
+                    mTransactionRecyclerView.setLayoutManager(mLayoutManager);
+                    mTransactionRecyclerView.setAdapter(mTransactionsRecyclerViewAdapter);
+                    mTransactionsRecyclerViewAdapter.updateList(mTransactions);
+
+                    startDetailActivity(mTransactionRecyclerView);
                 }
-
-                mTransactionRecyclerView.setHasFixedSize(true);
-                mTransactionRecyclerView.setLayoutManager(mLayoutManager);
-                mTransactionRecyclerView.setAdapter(mTransactionsRecyclerViewAdapter);
-                mTransactionsRecyclerViewAdapter.updateList(mTransactions);
-
-                startDetailActivity(mTransactionRecyclerView);
             }
 
             @Override
@@ -97,13 +99,21 @@ public class UserTransactionsListFragment extends Fragment {
             @Override
             public void onItemClicked(RecyclerView mRecyclerView, int position, View v) {
 
-                Intent i = new Intent(getActivity(), StoreDetailActivity.class);
                 Transactions transaction = mTransactions.get(position);
-//                int store_id = transaction.getId();
+                int transactionId = transaction.getId();
+
+
+                Fragment mTransactionDetailFragment = TransactionDetailFragment.newInstance(transactionId);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.flContent, mTransactionDetailFragment).commit();
+
+
+//                Intent i = new Intent(getActivity(), StoreDetailActivity.class);
+
 //                i.putExtra("store_id",store_id);
 //                i.putExtra("store_object",store);
 //                i.putExtra("")
-                startActivity(i);
+//                startActivity(i);
 
             }
         });

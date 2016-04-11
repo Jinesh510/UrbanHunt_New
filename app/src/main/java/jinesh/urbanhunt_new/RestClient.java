@@ -11,7 +11,7 @@ public class RestClient {
     private static uhapi REST_CLIENT;
 
     private static String ROOT =
-            "http://192.168.1.104:8000/";
+            "http://uhtest.herokuapp.com/";
 
     static {
         setupRestClient();

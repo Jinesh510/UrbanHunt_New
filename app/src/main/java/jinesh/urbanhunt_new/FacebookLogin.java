@@ -16,6 +16,8 @@ import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 
+import jinesh.urbanhunt_new.model.UserDetails;
+import jinesh.urbanhunt_new.model.UserProfile;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -29,13 +31,13 @@ public class FacebookLogin extends AppCompatActivity {
     CallbackManager callbackManager;
     String API = "http://192.168.1.101:8000/";
 //    final String CLIENT_ID = "ejIbSPISZLcilHNiRaArwKKUgTTOAeHPXXZEJqVc";
-    final String CLIENT_ID = "8KHU8SRpTyG8dB0EnR8Z1Yyp5Ebo0rh0NW07uoTl";
+    final String CLIENT_ID = "wPmZrvKeBNhXyfQFaCWmbgij50ZTKPnwmlFI8nGw";
 
 //    final String CLIENT_SECRET = "k4135i0OLqZrquXtO4D0QC3JwMWfuRdyf0jDm1uUppM5Nnq" +
 //            "3wmWelgjmBeOqzqbnsX2soXWmmJCEUArHOz0k55e8l1Kiy5QVaUgUqBrbP8Ti1Vt10FMKDy5Voq01hdZY";
 
-    final String CLIENT_SECRET = "EFohDzJkt66HCBw2Nm4dt215B805fKDyoopGSloKaEyWRcrlvqA1cFEAHZIpbh" +
-            "5C881qXTdpewE7pBoBEMmmuoaOyT7b5j2LVHtVfFbfQsyam1Hma8qct0dyvRJjQXOE";
+    final String CLIENT_SECRET = "yOkTyzWy1KIrzDFJ8l09MsA0gpx7L7b08CINPkmtSadaZ6XJgd" +
+            "FIob7sbw2EYo7SwGGPSrrGGPwPN6JDcKA27lxR6KRVgQZFmzfY6nndAOTMDq4dVEcSXNANZH0q8idt";
 
     Context c;
 
@@ -90,23 +92,55 @@ public class FacebookLogin extends AppCompatActivity {
                         Log.d("Keys", jsonObject.toString());
 
 
+
                         SaveSharedPreference.setFBUserAccessToken(FacebookLogin.this, jsonObject.get("token").toString());
 
+                        final String token = "Token ";
+                        final String access_token = SaveSharedPreference.getFBUserAccessToken(FacebookLogin.this);
+                        String access_token_wo_quotes = access_token.replace("\"", "");
+                        final String s = token.concat(access_token_wo_quotes);
 
-                        Intent intent = new Intent(FacebookLogin.this, RegisterationIntentService.class);
-                        startService(intent);
-
-
-                        new Handler().postDelayed(new Runnable() {
+                        RestClient.get().getUserProfile(s, new Callback<UserProfile>() {
                             @Override
-                            public void run() {
+                            public void success(UserProfile userProfile, Response response) {
+
+                                UserDetails mUserDetails = userProfile.getDetails();
+
+                                String mReferralCode = mUserDetails.getReferalcode();
+                                String mUserEmail = userProfile.getUsername();
+
+                                Log.d("referralCode",mReferralCode);
+                                Log.d("user_email",mUserEmail);
+
+                                SaveSharedPreference.setUserEmail(FacebookLogin.this, mUserEmail);
+                                SaveSharedPreference.setUserReferralCode(FacebookLogin.this, mReferralCode);
+
+                                Intent intent = new Intent(FacebookLogin.this, RegisterationIntentService.class);
+                                startService(intent);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
                             /* Create an Intent that will start the Menu-Activity. */
-                                Intent mainIntent = new Intent(FacebookLogin.this, MainActivity.class);
+                                        Intent mainIntent = new Intent(FacebookLogin.this, MainActivity.class);
 //                                Intent mainIntent = new Intent(FacebookLogin.this, LocationTestActivity.class);
-                                FacebookLogin.this.startActivity(mainIntent);
-                                FacebookLogin.this.finish();
+                                        FacebookLogin.this.startActivity(mainIntent);
+                                        FacebookLogin.this.finish();
+                                    }
+                                }, 500);
+
+
                             }
-                        }, 500);
+
+                            @Override
+                            public void failure(RetrofitError error) {
+
+
+                            }
+                        });
+
+
 //
 //                        Intent i = new Intent(c, LogoutActivity.class);
 //                        startActivity(i);

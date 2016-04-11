@@ -96,15 +96,17 @@ public class StoresListFragment extends Fragment{
 
         ArrayList<String> sub_locality_list = new ArrayList<>();
 
-        sub_locality_list.add("Malad East");
-        sub_locality_list.add("Andheri East");
+        sub_locality_list.add("Malad-East");
+        sub_locality_list.add("Andheri-East");
+        sub_locality_list.add("Thane-West");
         sub_locality_list.add("All");
 
+//        String[] sub_locality_list = {"Malad-East","Andheri-East","Thane-West"};
         mLocationSearchTxt = (AutoCompleteTextView)view.findViewById(R.id.locationSearchTxt);
         mLocationSearchBtn = (Button)view.findViewById(R.id.locationSearchBtn);
 
         ArrayAdapter<String> sub_locality_adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.autocomplete_tv_item,sub_locality_list);
+                android.R.layout.simple_list_item_1,sub_locality_list);
 
         mLocationSearchTxt.setAdapter(sub_locality_adapter);
         mLocationSearchTxt.setThreshold(1);

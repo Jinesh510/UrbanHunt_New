@@ -3,14 +3,20 @@ package jinesh.urbanhunt_new.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Jinesh on 09/04/16.
  */
-public class Transactions {
+public class Transactions implements Serializable {
 
     @SerializedName("image")
     @Expose
     private String image;
+
+    @SerializedName("id")
+    @Expose
+    private int id;
 
     @SerializedName("uploaded_date")
     @Expose
@@ -44,6 +50,10 @@ public class Transactions {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**

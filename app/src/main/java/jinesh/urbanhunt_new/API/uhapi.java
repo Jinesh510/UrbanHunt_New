@@ -11,6 +11,7 @@ import jinesh.urbanhunt_new.model.Sectors;
 import jinesh.urbanhunt_new.model.Stores;
 import jinesh.urbanhunt_new.model.Transactions;
 import jinesh.urbanhunt_new.model.UserPoints;
+import jinesh.urbanhunt_new.model.UserProfile;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -104,6 +105,11 @@ public interface uhapi {
     @GET("/user_profile/bills/")
     public void getUserTransactions(@Header("Authorization") String auth_token, Callback<ArrayList<Transactions>> Response);
 
+    @GET("/user_profile/profile")
+    public void getUserProfile(@Header("Authorization") String auth_token, Callback<UserProfile> Response);
+
+    @GET("/user_profile/bills/{bill_id}")
+    public void getTransactionDetail(@Header("Authorization") String auth_token,@Path("bill_id") int bill_id, Callback<Transactions> Response);
 
 }
 

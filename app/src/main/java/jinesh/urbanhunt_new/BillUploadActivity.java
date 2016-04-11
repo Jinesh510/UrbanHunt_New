@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.focus.android.sdk.FocusSdk;
-import com.focus.android.sdk.common.configuration.UserServiceLevel;
-import com.focus.android.sdk.services.exceptions.FocusSdkInitializationException;
-
 import java.io.File;
 
+import jinesh.urbanhunt_new.Fragments.RateExperienceDialogFragment;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -47,46 +45,46 @@ public class BillUploadActivity extends AppCompatActivity {
         pickImageBtn = (Button)findViewById(R.id.pickImageBtn);
         billUploadBtn = (Button)findViewById(R.id.billUploadBtn);
 
-        try {
-            UserServiceLevel serviceLevel = FocusSdk.getInstance().getUserState();
-
-            switch(serviceLevel) {
-
-                case BACKGROUND_TRACKING_OFF:
-                    //This indicates that all of the SDK's services except background tracking are enabled for the current user on the current device
-                    Log.d("background_tracking_off","true");
-                    break;
-
-                case ALL_SERVICES_ON:
-                    //This indicates that all of the SDK's services are enabled for the current user on the current device
-                    Log.d("all_services_on","true");
-                    break;
-
-
-                case LOCATION_SERVICES_OFF:
-                    //This indicates that all of the location related services (including background tracking + on demand tracking) are disabled for the current user on the current device
-                    Log.d("location_services","true");
-                    break;
-
-
-                case ALL_SERVICES_OFF:
-                    //This indicates that all of the analytics and location services of the SDK are disabled for the current user on the current device
-                    Log.d("all_services_off","true");
-                    break;
-
-
-            }
-
-
-        } catch (FocusSdkInitializationException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FocusSdk.getInstance().predictLocation();
-        } catch (FocusSdkInitializationException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            UserServiceLevel serviceLevel = FocusSdk.getInstance().getUserState();
+//
+//            switch(serviceLevel) {
+//
+//                case BACKGROUND_TRACKING_OFF:
+//                    //This indicates that all of the SDK's services except background tracking are enabled for the current user on the current device
+//                    Log.d("background_tracking_off","true");
+//                    break;
+//
+//                case ALL_SERVICES_ON:
+//                    //This indicates that all of the SDK's services are enabled for the current user on the current device
+//                    Log.d("all_services_on","true");
+//                    break;
+//
+//
+//                case LOCATION_SERVICES_OFF:
+//                    //This indicates that all of the location related services (including background tracking + on demand tracking) are disabled for the current user on the current device
+//                    Log.d("location_services","true");
+//                    break;
+//
+//
+//                case ALL_SERVICES_OFF:
+//                    //This indicates that all of the analytics and location services of the SDK are disabled for the current user on the current device
+//                    Log.d("all_services_off","true");
+//                    break;
+//
+//
+//            }
+//
+//
+//        } catch (FocusSdkInitializationException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            FocusSdk.getInstance().predictLocation();
+//        } catch (FocusSdkInitializationException e) {
+//            e.printStackTrace();
+//        }
 
 
         pickImageBtn.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +116,12 @@ public class BillUploadActivity extends AppCompatActivity {
 
                         String a = "Uploaded";
                         Toast.makeText(BillUploadActivity.this,a,Toast.LENGTH_SHORT).show();
+//                        showEditDialog();
+
+
+
+                        Intent i = new Intent(BillUploadActivity.this,MainActivity.class);
+                        startActivity(i);
                     }
 
                     @Override
@@ -132,6 +136,25 @@ public class BillUploadActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
+    }
+
+    private void showEditDialog() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        RateExperienceDialogFragment mRateExperienceDialogFragment = RateExperienceDialogFragment.newInstance();
+        mRateExperienceDialogFragment.show(fm,"fragment_rate_exp");
+
+        mRateExperienceDialogFragment.setRateExperienceListener(new RateExperienceDialogFragment.RateExperienceListener() {
+            @Override
+            public void onFinishRatingDialog(int mStars) {
+
+                //Make a POST call to record the feedback
+            }
+        });
     }
 
     public void onLaunchCamera() {

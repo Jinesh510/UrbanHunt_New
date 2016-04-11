@@ -7,16 +7,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Point Left"
-        android:id="@+id/pointsLeftTxt"
-        android:textSize="30sp"/>
-
-    <TextView
+        android:id="@+id/experienceTxt"
+        android:text="Experience"
+        android:textSize="16dp"/>
+    <android.support.v7.widget.AppCompatRatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pointsLeft"
-        android:layout_toRightOf="@+id/pointsLeftTxt"
-        android:layout_marginLeft="50dp"
-        android:textSize="30sp"/>
+        android:id="@+id/experienceRating"
+        android:layout_below="@+id/experienceTxt"
+        android:layout_margin="10dp"/>
 
 </RelativeLayout>

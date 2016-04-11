@@ -10,6 +10,10 @@ import android.preference.PreferenceManager;
 public class SaveSharedPreference {
 
     static final String USER_ACCESS_TOKEN = "access_token";
+    static final String USER_EMAIL = "user_email";
+    static final String USER_REFERRAL_CODE = "referral_code";
+
+
 
     static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -41,5 +45,29 @@ public class SaveSharedPreference {
         editor.clear();
         editor.commit();
 
+    }
+
+    public static void setUserEmail(Context ctx, String user_email)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(USER_EMAIL, user_email);
+        editor.commit();
+    }
+
+    public static String getUserEmail(Context ctx)
+    {
+        return getSharedPreferences(ctx).getString(USER_EMAIL, "missing");
+    }
+
+    public static void setUserReferralCode(Context ctx, String user_referral_code)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(USER_REFERRAL_CODE, user_referral_code);
+        editor.commit();
+    }
+
+    public static String getUserReferralCode(Context ctx)
+    {
+        return getSharedPreferences(ctx).getString(USER_REFERRAL_CODE, "missing");
     }
 }

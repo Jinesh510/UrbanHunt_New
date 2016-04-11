@@ -10,49 +10,38 @@ public class BillVerified {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
     @SerializedName("bill_amount")
     @Expose
-    private Integer billAmount;
+    private int billAmount;
     @SerializedName("verified_date")
     @Expose
     private String verifiedDate;
+
+    @SerializedName("points_earned")
+    @Expose
+    private int points_earned;
 
     /**
      *
      * @return
      *     The id
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     *     The id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
     /**
      *
      * @return
      *     The billAmount
      */
-    public Integer getBillAmount() {
+    public int getBillAmount() {
         return billAmount;
     }
 
-    /**
-     *
-     * @param billAmount
-     *     The bill_amount
-     */
-    public void setBillAmount(Integer billAmount) {
-        this.billAmount = billAmount;
-    }
 
     /**
      *
@@ -63,12 +52,7 @@ public class BillVerified {
         return verifiedDate;
     }
 
-    /**
-     *
-     * @param verifiedDate
-     *     The verified_date
-     */
-    public void setVerifiedDate(String verifiedDate) {
-        this.verifiedDate = verifiedDate;
+    public int getPoints_earned() {
+        return points_earned;
     }
 }

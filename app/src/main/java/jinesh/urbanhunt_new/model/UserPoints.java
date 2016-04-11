@@ -8,7 +8,11 @@ public class UserPoints {
     int points_spent;
     int points_earned;
     int points_left;
+    int user;
 
+    public int getUser() {
+        return user;
+    }
 
     public int getPoints_spent() {
         return points_spent;

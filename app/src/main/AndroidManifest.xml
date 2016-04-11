@@ -85,6 +85,8 @@
 
         <activity android:name=".Activity.StoresListDummyActivity"></activity>
 
+        <activity android:name=".Activity.NavigationDrawerActivity"></activity>
+
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

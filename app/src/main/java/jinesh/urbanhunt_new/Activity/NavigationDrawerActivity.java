@@ -42,7 +42,6 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, flFragment).commit();
 
-
     }
 
     public Fragment getFragment(int id){
